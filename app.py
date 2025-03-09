@@ -38,9 +38,26 @@ ax.set_xlabel("Musim")
 ax.set_ylabel("Jumlah Pengguna")
 st.pyplot(fig)
 
+# Clustering Kategori Penggunaan Sepeda
+day_df["usage_category"] = pd.cut(day_df["cnt"], bins=[0, 4000, 6000, 8000, 10000],
+                                   labels=["Rendah", "Sedang", "Tinggi", "Sangat Tinggi"])
+
+st.subheader("Clustering Kategori Penggunaan Sepeda")
+st.dataframe(day_df[["dteday", "cnt", "usage_category"]])
+
+# Visualisasi Clustering
+st.subheader("Visualisasi Kategori Penggunaan Sepeda")
+fig, ax = plt.subplots()
+day_df["usage_category"].value_counts().plot(kind="bar", ax=ax)
+ax.set_title("Distribusi Kategori Penggunaan Sepeda")
+ax.set_xlabel("Kategori")
+ax.set_ylabel("Jumlah Hari")
+st.pyplot(fig)
+
 # Insights
 st.subheader("Insights")
-st.write("1. Tren penggunaan sepeda menunjukkan puncak pada jam-jam tertentu, terutama pada jam sibuk pagi dan sore hari.")
-st.write("2. Musim memiliki pengaruh terhadap jumlah pengguna, dengan musim tertentu menunjukkan tingkat penggunaan yang lebih tinggi.")
+st.write("1. Jam penggunaan sepeda tertinggi ada pada jam sibuk, yaitu 07:00 dan 16:00-18:00.")
+st.write("2. Musim memiliki hubungan terkait banyaknya penggunaan sepeda, penggunaan sepeda tertinggi berada pada musim yang hangat seperti Summer dan Fall.")
+st.write("3. Pengguna sepeda dapat dikelompokkan ke dalam beberapa kategori berdasarkan jumlah pengguna harian, yang membantu dalam analisis pola penggunaan.")
 
 # Run the app by using `streamlit run app.py` in the terminal
