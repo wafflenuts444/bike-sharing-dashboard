@@ -40,7 +40,7 @@ st.dataframe(day_df[["dteday", "cnt", "keterangan"]])
 
 st.subheader("Visualisasi Kategori Penggunaan Sepeda")
 fig, ax = plt.subplots()
-day_df["usage_category"].value_counts().plot(kind="bar", ax=ax)
+day_df["keterangan"].value_counts().plot(kind="bar", ax=ax)
 ax.set_title("Distribusi Kategori Penggunaan Sepeda")
 ax.set_xlabel("Kategori")
 ax.set_ylabel("Jumlah Hari")
